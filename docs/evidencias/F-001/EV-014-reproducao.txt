@@ -1,0 +1,40 @@
+# EV-014 · reproducao
+# comando: npx playwright test tests/e2e/checkout.spec.js -g 'Confirmando…" cancela'
+# shell: bash (conversão de caminhos do MSYS desligada)
+# início: 2026-11-08T14:42:04.513Z
+# fim: 2026-11-08T14:42:13.798Z (9.3 s)
+# resultado: regex \d+ passed
+# código de saída: 1
+
+Running 1 test using 1 worker
+
+  x  1 [chromium] › tests\e2e\checkout.spec.js:105:3 › US-08 Checkout › [REQ-007] sair do checkout durante "Confirmando…" cancela o pedido e não força a ida a #/pedido (6.5s)
+
+
+  1) [chromium] › tests\e2e\checkout.spec.js:105:3 › US-08 Checkout › [REQ-007] sair do checkout durante "Confirmando…" cancela o pedido e não força a ida a #/pedido 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /#\/carrinho$/
+    Received string:  "file:///C:/Users/duduf/OneDrive/%C3%81rea%20de%20Trabalho/Nova%20pasta/prototipos-projetos/src/index.html#/pedido"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        14 × locator resolved to <html lang="pt-BR">…</html>
+           - unexpected value "file:///C:/Users/duduf/OneDrive/%C3%81rea%20de%20Trabalho/Nova%20pasta/prototipos-projetos/src/index.html#/pedido"
+
+
+      113 |     await expect(page).toHaveURL(/#\/carrinho$/);
+      114 |     await page.waitForTimeout(1200);
+    > 115 |     await expect(page).toHaveURL(/#\/carrinho$/);
+          |                        ^
+      116 |     await expect(page.locator('.item')).toHaveCount(2);
+      117 |     const salvo = await page.evaluate(() => localStorage.getItem('rango:pedido'));
+      118 |     expect(salvo).toBeNull();
+        at C:\Users\duduf\OneDrive\Área de Trabalho\Nova pasta\prototipos-projetos\tests\e2e\checkout.spec.js:115:24
+
+    Error Context: tests\e2e\.resultados\checkout-US-08-Checkout-RE-70eaa--e-não-força-a-ida-a-pedido-chromium\error-context.md
+
+  1 failed
+    [chromium] › tests\e2e\checkout.spec.js:105:3 › US-08 Checkout › [REQ-007] sair do checkout durante "Confirmando…" cancela o pedido e não força a ida a #/pedido 

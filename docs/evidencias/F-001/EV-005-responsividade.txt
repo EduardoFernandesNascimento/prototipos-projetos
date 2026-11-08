@@ -1,0 +1,14 @@
+# EV-005 · responsividade
+# comando: node .opencode/scripts/conferir-responsividade.mjs 'file:///C:/Users/duduf/OneDrive/%C3%81rea%20de%20Trabalho/Nova%20pasta/prototipos-projetos/src/index.html#/' --prints .opencode/estado/F-001/prints/inicio
+# shell: bash (conversão de caminhos do MSYS desligada)
+# início: 2026-11-08T14:36:24.379Z
+# fim: 2026-11-08T14:36:27.307Z (2.9 s)
+# resultado: regex (\d+ falha\(s\), \d+ aviso\(s\))
+# código de saída: 0
+Responsividade · file:///C:/Users/duduf/OneDrive/%C3%81rea%20de%20Trabalho/Nova%20pasta/prototipos-projetos/src/index.html#/ · larguras 320, 360, 768, 1280
+- 320 px · ok · scrollWidth 320 / largura 320
+- 360 px · ok · scrollWidth 360 / largura 360
+- 768 px · ok · scrollWidth 768 / largura 768
+- 1280 px · ok · scrollWidth 1280 / largura 1280
+prints em .opencode/estado/F-001/prints/inicio
+0 falha(s), 0 aviso(s)

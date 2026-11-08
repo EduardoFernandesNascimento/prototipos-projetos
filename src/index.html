@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Início · Rango</title>
+  <meta name="description" content="Rango: protótipo de delivery de comida.">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/dados.js" defer></script>
+  <script src="js/util.js" defer></script>
+  <script src="js/loja.js" defer></script>
+  <script src="js/telas.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header role="banner" class="cabecalho">
+    <div class="cabecalho__faixa">
+      <a class="marca" href="#/">
+        <svg class="marca__icone" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 11h16a8 8 0 0 1-16 0zm1-2a7 7 0 0 1 14 0zM11 2h2v4h-2z"/></svg>
+        <span>Rango</span>
+      </a>
+      <a id="link-carrinho" class="link-carrinho" href="#/carrinho" aria-label="Carrinho, 0 itens">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 4H2V2h4.8l1 2H21l-3.6 8.6a2 2 0 0 1-1.8 1.4H8.1l-.9 2H19v2H4l2.2-4.5L5.2 4z"/></svg>
+        <span class="contador" aria-hidden="true">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1" class="conteudo"></main>
+
+  <footer class="rodape">
+    <p>Protótipo: nenhum pedido é enviado de verdade.</p>
+  </footer>
+
+  <dialog id="dialogo-troca" class="dialogo" aria-labelledby="dialogo-troca-titulo" aria-describedby="dialogo-troca-texto">
+    <h2 id="dialogo-troca-titulo">Começar um novo carrinho?</h2>
+    <p id="dialogo-troca-texto"></p>
+    <div class="dialogo__acoes">
+      <button type="button" class="botao-secundario" data-acao="cancelar">Cancelar</button>
+      <button type="button" class="botao-principal" data-acao="confirmar">Esvaziar e adicionar</button>
+    </div>
+  </dialog>
+
+  <div class="aviso-caixa" data-visivel="nao">
+    <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
+    <button type="button" class="aviso__fechar" aria-label="Fechar aviso"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"/></svg></button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# EV-004 · audit
+# comando: npm audit --audit-level=high
+# shell: bash (conversão de caminhos do MSYS desligada)
+# início: 2026-11-08T14:36:21.928Z
+# fim: 2026-11-08T14:36:23.351Z (1.4 s)
+# resultado: regex (found \d+ vulnerabilities)
+# código de saída: 0
+found 0 vulnerabilities

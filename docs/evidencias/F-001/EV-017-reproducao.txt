@@ -1,0 +1,13 @@
+# EV-017 · reproducao
+# comando: npx playwright test tests/e2e/restaurante.spec.js -g percentual
+# shell: bash (conversão de caminhos do MSYS desligada)
+# início: 2026-11-08T14:44:03.342Z
+# fim: 2026-11-08T14:44:06.250Z (2.9 s)
+# resultado: regex \d+ passed
+# código de saída: 0
+
+Running 1 test using 1 worker
+
+  ok 1 [chromium] › tests\e2e\restaurante.spec.js:48:3 › US-04 e US-05 Restaurante › [REQ-004] id com sequência percentual inválida mostra "Restaurante não encontrado" sem erro (254ms)
+
+  1 passed (1.0s)
