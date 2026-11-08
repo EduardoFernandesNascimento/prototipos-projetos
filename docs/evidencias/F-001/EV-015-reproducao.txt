@@ -1,0 +1,40 @@
+# EV-015 · reproducao
+# comando: npx playwright test tests/e2e/restaurante.spec.js -g percentual
+# shell: bash (conversão de caminhos do MSYS desligada)
+# início: 2026-11-08T14:42:15.070Z
+# fim: 2026-11-08T14:42:22.993Z (7.9 s)
+# resultado: regex \d+ passed
+# código de saída: 1
+
+Running 1 test using 1 worker
+
+  x  1 [chromium] › tests\e2e\restaurante.spec.js:48:3 › US-04 e US-05 Restaurante › [REQ-004] id com sequência percentual inválida mostra "Restaurante não encontrado" sem erro (5.1s)
+
+
+  1) [chromium] › tests\e2e\restaurante.spec.js:48:3 › US-04 e US-05 Restaurante › [REQ-004] id com sequência percentual inválida mostra "Restaurante não encontrado" sem erro 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Restaurante não encontrado', level: 1 })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Restaurante não encontrado', level: 1 }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Restaurante não encontrado', level: 1 })
+
+
+      52 |     // carga inicial
+      53 |     await page.goto(url('#/restaurante/%'));
+    > 54 |     await expect(naoEncontrado).toBeVisible();
+         |                                 ^
+      55 |     // troca de rota (hashchange) a partir de uma tela válida
+      56 |     await page.goto(url('#/restaurante/1'));
+      57 |     await expect(page.getByRole('heading', { level: 1, name: 'Restaurante não encontrado' })).toBeHidden();
+        at C:\Users\duduf\OneDrive\Área de Trabalho\Nova pasta\prototipos-projetos\tests\e2e\restaurante.spec.js:54:33
+
+    Error Context: tests\e2e\.resultados\restaurante-US-04-e-US-05--804a9-nte-não-encontrado-sem-erro-chromium\error-context.md
+
+  1 failed
+    [chromium] › tests\e2e\restaurante.spec.js:48:3 › US-04 e US-05 Restaurante › [REQ-004] id com sequência percentual inválida mostra "Restaurante não encontrado" sem erro 

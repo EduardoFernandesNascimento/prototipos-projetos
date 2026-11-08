@@ -4,3 +4,7 @@
 
 # Pasta local dos agentes (PROTOCOLO §7) — nunca vai para o remoto
 /.claude/
+
+# Dependências e resultados de testes
+/node_modules/
+/tests/e2e/.resultados/

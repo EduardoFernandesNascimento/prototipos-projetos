@@ -1,0 +1,13 @@
+{
+  "name": "prototipos-projetos",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Protótipo Rango (delivery de comida): HTML, CSS e JavaScript puros, sem build. O npm só traz as ferramentas de teste.",
+  "scripts": {
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.56.0"
+  }
+}

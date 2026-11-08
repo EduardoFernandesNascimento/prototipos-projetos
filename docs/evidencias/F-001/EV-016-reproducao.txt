@@ -1,0 +1,13 @@
+# EV-016 · reproducao
+# comando: npx playwright test tests/e2e/checkout.spec.js -g 'Confirmando…" cancela'
+# shell: bash (conversão de caminhos do MSYS desligada)
+# início: 2026-11-08T14:43:57.838Z
+# fim: 2026-11-08T14:44:02.151Z (4.3 s)
+# resultado: regex \d+ passed
+# código de saída: 0
+
+Running 1 test using 1 worker
+
+  ok 1 [chromium] › tests\e2e\checkout.spec.js:105:3 › US-08 Checkout › [REQ-007] sair do checkout durante "Confirmando…" cancela o pedido e não força a ida a #/pedido (1.6s)
+
+  1 passed (2.3s)
