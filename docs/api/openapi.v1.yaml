@@ -1,0 +1,16 @@
+openapi: 3.1.0
+info:
+  title: Rango
+  version: 1.0.0
+  description: >-
+    O Rango é um protótipo estático (HTML, CSS e JavaScript abertos por file://)
+    e não expõe nem consome API: as fotos são arquivos locais em src/img/ e o
+    REQ-002 proíbe chamadas de rede. O login do REQ-015 é simulado no navegador,
+    com o estado guardado no localStorage, sem servidor. Por isso o contrato não
+    tem rotas.
+  license:
+    name: Uso interno do protótipo
+servers:
+  - url: file:///src/index.html
+    description: Protótipo estático aberto localmente; não há servidor de API.
+paths: {}

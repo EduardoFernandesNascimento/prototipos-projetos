@@ -96,6 +96,16 @@
     R.avisar('Carrinho esvaziado. ' + nome + ' adicionado ao carrinho.');
   });
 
+  /* ---------- foto que falha cai na ilustração SVG da categoria, uma vez só (REQ-012, UX-02) ---------- */
+  document.addEventListener('error', function (e) {
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset.reserva || img.dataset.erro === 'sim') return;
+    img.dataset.erro = 'sim';
+    img.removeAttribute('srcset');
+    img.removeAttribute('sizes');
+    img.src = img.dataset.reserva;
+  }, true);
+
   /* ---------- links para âncoras da própria página não mexem na rota ---------- */
   document.addEventListener('click', function (e) {
     if (e.defaultPrevented) return;
@@ -115,6 +125,7 @@
     if (h === '#/carrinho') return { tela: R.telaCarrinho };
     if (h === '#/checkout') return { tela: R.telaCheckout };
     if (h === '#/pedido') return { tela: R.telaPedido };
+    if (h === '#/creditos') return { tela: R.telaCreditos };
     var m = /^#\/restaurante\/([^/]+)$/.exec(h);
     if (m) {
       /* sequência percentual inválida (ex.: #/restaurante/%) lança URIError: usa o texto cru, que cai em "não encontrado" */
