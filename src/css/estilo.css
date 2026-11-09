@@ -100,8 +100,9 @@ h1:focus-visible { outline: 3px solid var(--cor-foco); outline-offset: 2px; }
 .cabecalho__faixa {
   max-width: var(--largura);
   margin: 0 auto;
-  padding: var(--esp-1) var(--esp-2);
+  padding: var(--esp-1);  /* em 320 px a logo, "Entrar" e o carrinho cabem numa linha */
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--esp-1);
@@ -117,7 +118,39 @@ h1:focus-visible { outline: 3px solid var(--cor-foco); outline-offset: 2px; }
   color: var(--cor-marca);
   text-decoration: none;
 }
-.marca__icone { flex: none; }
+/* logo (REQ-014): 28 px de altura em telas estreitas, 32 px a partir de 48rem */
+.marca__logo { flex: none; display: block; width: auto; height: 1.75rem; max-width: 8rem; }
+.marca__nome { stroke: currentColor; }
+
+/* área de conta (REQ-015): Entrar, ou saudação + Sair */
+.conta {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-1);
+  min-width: 0;
+  margin-left: auto;
+}
+.botao-secundario.botao-compacto { padding: 0 0.625rem; line-height: 1.2; gap: 0.25rem; font-size: var(--fs-0); flex: none; min-width: var(--alvo-principal); }
+.botao-secundario.botao-compacto svg { flex: none; }
+.conta__saudacao {
+  margin: 0;
+  min-width: 0;
+  max-width: 12ch;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: var(--fs-0);
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+/* logado em tela estreita: a conta desce para a 2ª linha inteira */
+.conta[data-estado="logado"] {
+  order: 3;
+  flex: 1 1 100%;
+  justify-content: space-between;
+  margin-left: 0;
+}
+.conta[data-estado="logado"] .conta__saudacao { max-width: none; flex: 0 1 auto; }
 .link-carrinho {
   display: inline-flex;
   align-items: center;
@@ -160,6 +193,19 @@ h1:focus-visible { outline: 3px solid var(--cor-foco); outline-offset: 2px; }
   padding: var(--esp-2) var(--esp-2) calc(var(--esp-3) + 4rem);
 }
 .rodape p { margin: 0; }
+.rodape p + p { margin-top: 0.25rem; }
+.rodape__link { display: inline-flex; align-items: center; min-height: 1.5rem; font-weight: 600; }
+
+/* ---------- créditos das fotos ---------- */
+.creditos__intro { max-width: 60ch; color: var(--cor-texto-2); }
+.creditos { list-style: none; margin: var(--esp-2) 0; padding: 0; display: grid; gap: var(--esp-1);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+.credito { padding: var(--esp-2); background: var(--cor-superficie); border: 1px solid var(--cor-borda-suave); border-radius: var(--raio); min-width: 0; }
+.credito__item { font-size: var(--fs-1); }
+.credito__dados { margin: 0; display: grid; gap: 0.25rem; font-size: var(--fs-0); }
+.credito__dados > div { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 0.5rem; }
+.credito__dados dt { font-weight: 700; }
+.credito__dados dd { margin: 0; overflow-wrap: anywhere; }
 
 /* ---------- botões ---------- */
 .botao-principal, .botao-secundario {
@@ -295,7 +341,15 @@ h1:focus-visible { outline: 3px solid var(--cor-foco); outline-offset: 2px; }
   overflow: hidden;
   box-shadow: var(--sombra);
 }
-.cartao-restaurante:focus-within { outline: 3px solid var(--cor-foco); outline-offset: 2px; }
+/* destaque do card (REQ-013): o foco por teclado ganha o mesmo destaque do hover */
+.cartao-restaurante:has(:focus-visible), .cartao-prato:has(:focus-visible) {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-forte);
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 2px;
+}
+/* espaço da foto reservado com fundo de marca enquanto ela carrega (REQ-012, UX-01) */
+.cartao__foto, .capa { background: var(--cor-marca-clara); }
 .cartao-restaurante .cartao__foto { flex: 1 1 100%; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 .cartao__corpo { flex: 1 1 100%; padding: var(--esp-2); min-width: 0; }
 .cartao__nome a {
@@ -561,6 +615,19 @@ input, h1, h2, .resumo-erros { scroll-margin-top: 5.5rem; }
   color: var(--cor-texto);
   box-shadow: var(--sombra-forte);
 }
+.dialogo__aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--cor-marca-clara);
+  color: var(--cor-texto);
+  font-size: var(--fs-0);
+}
+.dialogo__aviso svg { flex: none; margin-top: 0.15em; color: var(--cor-marca); }
+.formulario-login { display: grid; gap: var(--esp-2); margin-top: var(--esp-2); }
+.formulario-login .dialogo__acoes { margin-top: 0; }
 .dialogo::backdrop { background: rgb(20 10 5 / 0.6); }
 .dialogo__acoes { display: flex; flex-direction: column; gap: var(--esp-1); margin-top: var(--esp-2); }
 .dialogo__acoes .botao-secundario, .dialogo__acoes .botao-principal { width: 100%; }
@@ -612,6 +679,16 @@ input, h1, h2, .resumo-erros { scroll-margin-top: 5.5rem; }
   .aviso-caixa { left: auto; width: 24rem; }
 }
 
+@media (min-width: 30rem) {
+  .cabecalho__faixa { padding: var(--esp-1) var(--esp-2); }
+}
+
+@media (min-width: 48rem) {
+  .marca__logo { height: 2rem; }
+  .conta[data-estado="logado"] { order: 0; flex: 0 1 auto; justify-content: flex-end; margin-left: auto; }
+  .conta[data-estado="logado"] .conta__saudacao { max-width: 20ch; }
+}
+
 @media (min-width: 64rem) {
   .filtros { grid-template-columns: minmax(16rem, 1fr) 2fr; align-items: end; }
   .restaurante-topo { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
@@ -625,7 +702,9 @@ input, h1, h2, .resumo-erros { scroll-margin-top: 5.5rem; }
   .botao-principal:hover:not(:disabled), .botao-adicionar:hover { background: var(--cor-marca-escura); border-color: var(--cor-marca-escura); }
   .botao-secundario:hover { background: var(--cor-marca-clara); }
   .link-carrinho:hover { text-decoration: underline; }
-  .cartao-restaurante:hover, .cartao-prato:hover { box-shadow: var(--sombra-forte); }
+  /* salto do card (REQ-013): só com mouse; em toque não fica preso levantado */
+  .cartao-restaurante:hover, .cartao-prato:hover { transform: translateY(-4px); box-shadow: var(--sombra-forte); }
+  .cartao-restaurante:hover { cursor: pointer; }
   .campo input:hover { border-color: var(--cor-texto); }
   .chip:hover, .opcao:hover, .qtd__botao:hover:not(:disabled) { background: var(--cor-marca-clara); }
   .chip:has(input:checked):hover { background: var(--cor-marca-escura); }
@@ -633,12 +712,29 @@ input, h1, h2, .resumo-erros { scroll-margin-top: 5.5rem; }
 
 /* ---------- movimento só para quem não pediu menos (RESP-09) ---------- */
 @media (prefers-reduced-motion: no-preference) {
-  .botao-principal, .botao-secundario, .botao-adicionar, .chip, .opcao, .qtd__botao,
-  .cartao-restaurante, .cartao-prato, .aviso-caixa {
+  .botao-principal, .botao-secundario, .botao-adicionar, .chip, .opcao, .qtd__botao, .aviso-caixa {
     transition: background-color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  /* "salto": ultrapassagem leve na subida */
+  .cartao-restaurante, .cartao-prato {
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 200ms ease, border-color 200ms ease;
   }
   .carregando .girador { animation: girar 0.8s linear infinite; }
   .aviso-caixa[data-visivel="sim"] { animation: subir 0.2s ease-out; }
   @keyframes girar { to { transform: rotate(360deg); } }
   @keyframes subir { from { transform: translateY(0.5rem); opacity: 0; } to { transform: none; opacity: 1; } }
+}
+
+/* ---------- menos movimento: destaque na hora, sem deslocamento (REQ-013, RESP-09) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .cartao-restaurante:has(:focus-visible), .cartao-prato:has(:focus-visible) {
+    transform: none;
+    border-color: var(--cor-marca);
+  }
+}
+@media (prefers-reduced-motion: reduce) and (hover: hover) and (pointer: fine) {
+  .cartao-restaurante:hover, .cartao-prato:hover {
+    transform: none;
+    border-color: var(--cor-marca);
+  }
 }

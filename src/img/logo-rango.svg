@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 32" width="128" height="32" role="img" aria-labelledby="t">
+  <title id="t">Rango</title>
+  <!-- símbolo: tigela de lado, vapor e "R" em negativo -->
+  <g fill="none" stroke="#a3201c" stroke-width="2.25" stroke-linecap="round">
+    <path d="M10 11.5c-1.8-2 1.8-3.6 0-5.6"/>
+    <path d="M16 11.5c-1.8-2.4 1.8-4.6 0-7"/>
+    <path d="M22 11.5c-1.8-2 1.8-3.6 0-5.6"/>
+  </g>
+  <path fill="#a3201c" d="M2 14h28a14 13 0 0 1-28 0z"/>
+  <rect x="10" y="26.5" width="12" height="3" rx="1.5" fill="#a3201c"/>
+  <path fill="none" stroke="#ffffff" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" d="M13 24.5V16.5h3.4a2.4 2.4 0 0 1 0 4.8H13m3.6 0 2.9 3.2"/>
+  <!-- nome "Rango" em traços arredondados (sem fonte) -->
+  <g fill="none" stroke="#a3201c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M42 24V6h5.5a4.75 4.75 0 0 1 0 9.5H42m5.5 0L53 24"/>
+    <path d="M70.5 12v12m0-6a5 5 0 0 0-10 0a5 5 0 0 0 10 0"/>
+    <path d="M78 24V12m0 5a4.5 4.5 0 0 1 9 0v7"/>
+    <path d="M105 12v13a4.5 4.5 0 0 1-8.5 2.5M105 18a5 5 0 0 0-10 0a5 5 0 0 0 10 0"/>
+    <path d="M122.5 18a5.5 5.5 0 0 0-11 0a5.5 5.5 0 0 0 11 0"/>
+  </g>
+</svg>

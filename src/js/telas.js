@@ -24,6 +24,23 @@
     return '<div class="vazio">' + texto + (extra || '') + '</div>';
   }
 
+  /* foto do item (REQ-012): com item.foto, usa os WebP locais em duas larguras (srcset + sizes, RESP-06);
+     sem foto, a ilustração SVG da categoria. data-reserva guarda o SVG para o estado de erro (app.js). */
+  var FOTO = {
+    restaurante: { larguras: [480, 960], w: 480, h: 270, sizes: '(min-width: 72rem) 24rem, (min-width: 40rem) 50vw, 100vw' },
+    capa: { larguras: [480, 960], w: 480, h: 270, sizes: '(min-width: 64rem) 36rem, 100vw' },
+    prato: { larguras: [400, 800], w: 400, h: 300, sizes: '(min-width: 40rem) 18rem, 100vw' }
+  };
+
+  function fotoHtml(item, tipo, classe, lazy) {
+    var f = FOTO[tipo];
+    var base = ' class="' + classe + '" data-reserva="' + esc(item.imagem) + '"' + (lazy ? ' loading="lazy"' : '');
+    if (!item.foto) return '<img' + base + ' src="' + esc(item.imagem) + '" alt="" width="320" height="180">';
+    var srcset = f.larguras.map(function (l) { return esc(item.foto) + '-' + l + '.webp ' + l + 'w'; }).join(', ');
+    return '<img' + base + ' src="' + esc(item.foto) + '-' + f.larguras[0] + '.webp" srcset="' + srcset + '" sizes="' + f.sizes + '"' +
+      ' alt="' + esc(item.alt || '') + '" width="' + f.w + '" height="' + f.h + '">';
+  }
+
   /* ---------------- Início ---------------- */
   R.telaInicio = function (main) {
     var cats = [{ id: 'todas', nome: 'Todas' }].concat(window.RANGO_DADOS.categorias);
@@ -66,7 +83,7 @@
       });
       lista.innerHTML = achados.map(function (r, i) {
         return '<li class="cartao-restaurante">' +
-          '<img class="cartao__foto" src="' + r.imagem + '" alt="" width="320" height="180"' + (i >= 2 ? ' loading="lazy"' : '') + '>' +
+          fotoHtml(r, 'restaurante', 'cartao__foto', i >= 2) +
           '<div class="cartao__corpo">' +
             '<h2 class="cartao__nome"><a href="#/restaurante/' + r.id + '">' + esc(r.nome) + '</a></h2>' +
             '<p class="cartao__categoria">' + esc(R.categoriaNome(r.categoria)) + '</p>' +
@@ -108,7 +125,7 @@
     var contadorFoto = 0;
     main.innerHTML =
       '<div class="restaurante-topo">' +
-        '<img class="capa" src="' + r.imagem + '" alt="" width="320" height="180">' +
+        fotoHtml(r, 'capa', 'capa', false) +
         '<div class="restaurante-topo__texto">' +
           '<h1 tabindex="-1">' + esc(r.nome) + '</h1>' +
           '<p class="restaurante-info">' + esc(R.categoriaNome(r.categoria)) + ' <span aria-hidden="true">·</span> ' + info(r) + '</p>' +
@@ -122,7 +139,7 @@
           s.pratos.map(function (p) {
             contadorFoto++;
             return '<li class="cartao-prato"><div class="cartao-prato__corpo">' +
-              '<img class="cartao__foto" src="' + p.imagem + '" alt="" width="320" height="180"' + (contadorFoto > 2 ? ' loading="lazy"' : '') + '>' +
+              fotoHtml(p, 'prato', 'cartao__foto', contadorFoto > 2) +
                 '<h3 class="cartao-prato__nome">' + esc(p.nome) + '</h3>' +
                 '<p class="cartao-prato__descricao">' + esc(p.descricao) + '</p>' +
                 '<p class="cartao-prato__preco">' + R.preco(p.preco) + '</p>' +
@@ -462,6 +479,26 @@
       titulo: 'Checkout · Rango',
       limpar: function () { clearTimeout(timerEnvio); timerEnvio = null; }
     };
+  };
+
+  /* ---------------- Créditos das fotos (REQ-012: atribuição exigida por CC BY e CC BY-SA) ---------------- */
+  R.telaCreditos = function (main) {
+    var lista = window.RANGO_CREDITOS || [];
+    main.innerHTML =
+      '<h1 tabindex="-1">Créditos das fotos</h1>' +
+      '<p class="creditos__intro">As fotos dos pratos e restaurantes vêm do Wikimedia Commons e estão salvas no próprio protótipo. ' +
+        'Cada uma é usada conforme a licença indicada; nenhuma foi alterada além de recorte e redução de tamanho.</p>' +
+      '<ul class="creditos">' + lista.map(function (c) {
+        return '<li class="credito">' +
+          '<h2 class="credito__item">' + esc(c.item) + '</h2>' +
+          '<dl class="credito__dados">' +
+            '<div><dt>Autor</dt><dd>' + esc(c.autor) + '</dd></div>' +
+            '<div><dt>Licença</dt><dd>' + (c.licencaUrl ? '<a href="' + esc(c.licencaUrl) + '">' + esc(c.licenca) + '</a>' : esc(c.licenca)) + '</dd></div>' +
+            '<div><dt>Origem</dt><dd><a href="' + esc(c.origem) + '">' + esc(c.arquivo) + '</a></dd></div>' +
+          '</dl></li>';
+      }).join('') + '</ul>' +
+      '<p><a class="botao-secundario" href="#/">Ver restaurantes</a></p>';
+    return { titulo: 'Créditos das fotos · Rango' };
   };
 
   /* ---------------- Acompanhamento ---------------- */
